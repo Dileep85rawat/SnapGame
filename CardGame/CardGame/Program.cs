@@ -7,19 +7,15 @@ namespace CardGame
     {
         static void Main(string[] args)
         {
-            
+            SimulationLogic smLogic = new SimulationLogic();
             int numPacks = GetNumber("Enter the number of packs to use: ", 1, 50);//Max mumber can be any number, as of now set upto 50.
 
             MatchingConditions matchingCondition = ChooseMatchType();
-
-            SimulationLogic smLogic = new SimulationLogic();
-
             List<Card> cardPile = smLogic.CreateCardsPile(numPacks); 
             smLogic.ShufflingCards(cardPile);
             var result = smLogic.ExecutionOfGame(cardPile, matchingCondition);
 
-
-
+           
             Console.WriteLine("\n Result of Game ************************** \n");
             foreach (var snapMsg in result.snapMessages)
             {
@@ -39,7 +35,7 @@ namespace CardGame
             Console.WriteLine("\n ************************** ");
         }
 
-        static int GetNumber(string message, int min, int max)
+        private static int GetNumber(string message, int min, int max)
         {
             while (true)
             {
@@ -59,7 +55,7 @@ namespace CardGame
             }
         }
 
-        static MatchingConditions ChooseMatchType()
+        private static MatchingConditions ChooseMatchType()
         {
             Console.WriteLine("\nChoose a matching condition:\n1. Face Value\n2. Suit\n3. Both");
             int choice = GetNumber("Please enter 1 to 3 : ", 1, 3);
